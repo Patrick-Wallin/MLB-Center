@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">MLB Center</string>
+
+    <string-array name="main_menu_title">
+        <item>Scores</item>
+        <item>News</item>
+        <item>Statistics</item>
+        <item>Standings</item>
+        <item>Schedule</item>
+        <item>Players</item>
+        <item>Teams</item>
+    </string-array>
+
+    <string-array name="main_menu_key">
+        <item>Scores</item>
+        <item>News</item>
+        <item>Statistics</item>
+        <item>Standings</item>
+        <item>Schedule</item>
+        <item>Players</item>
+        <item>Teams</item>
+    </string-array>
+
+    <string-array name="mlb_teams">
+        <item>All</item>
+        <item>AL</item>
+        <item>NL</item>
+        <item>ARI</item>
+        <item>ATL</item>
+        <item>BAL</item>
+        <item>BOS</item>
+        <item>CHC</item>
+        <item>CWS</item>
+        <item>CIN</item>
+        <item>CLE</item>
+        <item>COL</item>
+        <item>DET</item>
+        <item>FLA</item>
+        <item>HOU</item>
+        <item>KAN</item>
+        <item>LAA</item>
+        <item>LAD</item>
+        <item>MIL</item>
+        <item>MIN</item>
+        <item>NYM</item>
+        <item>NYY</item>
+        <item>OAK</item>
+        <item>PHI</item>
+        <item>PIT</item>
+        <item>SD</item>
+        <item>SF</item>
+        <item>SEA</item>
+        <item>STL</item>
+        <item>TB</item>
+        <item>TEX</item>
+        <item>TOR</item>
+        <item>WAS</item>
+    </string-array>
+
+
+    <string name="mysportsfeeds_version">v1.1</string>
+    <string name="mysportsfeeds_url">https://api.mysportsfeeds.com/{versionNumber}/pull/mlb/{seasonName}/{feeds}</string>
+    <string name="version_number">versionNumber</string>
+    <string name="season_name">seasonName</string>
+    <string name="feeds">feeds</string>
+    <string name="feeds_overall_team_standings">overall_team_standings.json</string>
+    <string name="current_year">2017</string>
+    <string name="regular">regular</string>
+    <string name="playoff">playoff</string>
+    <string name="sort">team.abbr.A</string>
+</resources>
