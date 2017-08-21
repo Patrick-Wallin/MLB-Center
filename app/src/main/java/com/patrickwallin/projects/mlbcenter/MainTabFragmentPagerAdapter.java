@@ -51,15 +51,6 @@ public class MainTabFragmentPagerAdapter extends FragmentStatePagerAdapter {
         Log.i(LOG_TAG,"position: " + String.valueOf(position));
         Log.i(LOG_TAG,mFragmentMenuTitle.get(position));
         return StandingsFragment.newInstance();
-        /*
-        if(mFragmentAllTeamList.get(position) == true) {
-            return AllTeamFragment.newInstance(mFragmentTitleList.get(position));
-        }else {
-            mTeamFragment = new TeamFragment();
-            mAllTeamFragment = null;
-            return mTeamFragment;
-        }
-        */
     }
 
     @Override

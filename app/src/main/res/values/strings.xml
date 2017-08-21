@@ -64,8 +64,23 @@
     <string name="season_name">seasonName</string>
     <string name="feeds">feeds</string>
     <string name="feeds_overall_team_standings">overall_team_standings.json</string>
+    <string name="feeds_conference_team_standings">conference_team_standings.json</string>
+    <string name="feeds_division_team_standings">division_team_standings.json</string>
     <string name="current_year">2017</string>
     <string name="regular">regular</string>
     <string name="playoff">playoff</string>
     <string name="sort">team.abbr.A</string>
+    
+    <string name="standings_standings">Standings</string>
+    <string name="standings_division_title_team_name"></string>
+    <string name="standings_division_title_wins">W</string>
+    <string name="standings_division_title_lost">L</string>
+    <string name="standings_division_title_percentage">Pct</string>
+    <string name="standings_division_title_gamesback">GB</string>
+    <string name="standings_division_title_runsfor">RF</string>
+    <string name="standings_division_title_runsagainst">RA</string>
+
+
+    <string name="username"></string>
+    <string name="password"></string>
 </resources>

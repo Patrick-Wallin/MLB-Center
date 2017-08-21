@@ -9,10 +9,23 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
-import com.jacksonandroidnetworking.JacksonParserFactory;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONArrayRequestListener;
+import com.androidnetworking.interfaces.StringRequestListener;
 import com.patrickwallin.projects.mlbcenter.fragment.TeamFragment;
 
+import org.json.JSONArray;
+
+import java.io.IOException;
 import java.util.Calendar;
+
+import okhttp3.Authenticator;
+import okhttp3.Credentials;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.Route;
 
 public class MainActivity extends AppCompatActivity {
     //private TabLayout mTabLayout;
@@ -24,36 +37,62 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         AndroidNetworking.initialize(getApplicationContext());
-        AndroidNetworking.setParserFactory(new JacksonParserFactory());
+        //AndroidNetworking.setParserFactory(new JacksonParserFactory());
 
         int year = Calendar.getInstance().get(Calendar.YEAR);
 
-        //String loginInfo = getString(R.string.username) + ":" + getString(R.string.password);
-        //byte[] encodingByte = Base64.encode (loginInfo.getBytes(), Base64.DEFAULT);
-        //String encoding = new String(encodingByte);
-
+        String loginInfo = getString(R.string.username) + ":" + getString(R.string.password);
+        byte[] encodingByte = Base64.encode (loginInfo.getBytes(), Base64.DEFAULT);
+        final String encoding = new String(encodingByte);
 
         /*
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .authenticator(new Authenticator() {
+                    @Override
+                    public Request authenticate(Route route, Response response) throws IOException {
+                        return response.request().newBuilder()
+                                .header("Authorization", "Basic " + encoding)
+                                .build();
+                    }
+                })
+                .build();
+*/
+
+
+/*
         AndroidNetworking.get(getString(R.string.mysportsfeeds_url))
                 .addPathParameter(getString(R.string.version_number), getString(R.string.mysportsfeeds_version))
                 .addPathParameter(getString(R.string.season_name), String.valueOf(year) + "-" + getString(R.string.regular))
-                .addPathParameter(getString(R.string.feeds),getString(R.string.feeds_overall_team_standings))
-                .addQueryParameter(, "3")
-                .addHeaders("token", "1234")
-                .setTag("test")
+                .addPathParameter(getString(R.string.feeds),getString(R.string.feeds_conference_team_standings))
+                //.setOkHttpClient(okHttpClient)
+                .addHeaders("Authorization", Credentials.basic(getString(R.string.username),getString(R.string.password)))
                 .setPriority(Priority.LOW)
                 .build()
-                .getAsJSONArray(new JSONArrayRequestListener() {
+                .getAsString(new StringRequestListener() {
                     @Override
-                    public void onResponse(JSONArray response) {
-                        // do anything with response
+                    public void onResponse(String response) {
+                        Log.i("tag-response",response.toString());
                     }
+
                     @Override
-                    public void onError(ANError error) {
-                        // handle error
+                    public void onError(ANError anError) {
+                        Log.i("tag-error",anError.toString());
                     }
                 });
-                */
+
+                //.getAsJSONArray(new JSONArrayRequestListener() {
+                 //   @Override
+                 //   public void onResponse(JSONArray response) {
+                 //       Log.i("tag-response",response.toString());
+                 //   }
+
+                  //  @Override
+                  //  public void onError(ANError anError) {
+                  //      Log.i("tag-error",anError.toString());
+                  //  }
+                //});
+*/
+
 
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         //tabLayout.setupWithViewPager(viewPager);
