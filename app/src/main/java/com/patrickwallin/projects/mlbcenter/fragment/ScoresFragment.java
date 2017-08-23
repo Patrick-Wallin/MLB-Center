@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -21,10 +22,9 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import com.patrickwallin.projects.mlbcenter.R;
 import com.patrickwallin.projects.mlbcenter.adapter.DivisionStandingsAdapter;
-import com.patrickwallin.projects.mlbcenter.gsonmodel.DivisionTeamStandingsJSONData;
+import com.patrickwallin.projects.mlbcenter.adapter.ScoresAdapter;
 import com.patrickwallin.projects.mlbcenter.gsonmodel.FullDivisionTeamStandingsJSONData;
-
-import org.json.JSONException;
+import com.patrickwallin.projects.mlbcenter.gsonmodel.ScoresData;
 
 import java.util.Calendar;
 
@@ -33,23 +33,25 @@ import butterknife.ButterKnife;
 import okhttp3.Credentials;
 
 /**
- * Created by piwal on 8/18/2017.
+ * Created by piwal on 8/21/2017.
  */
 
-public class StandingsFragment extends Fragment {
-    @BindView(R.id.standings_recycler_view)
-    RecyclerView mStandingsRecyclerView;
+public class ScoresFragment extends Fragment {
+    @BindView(R.id.scores_recycler_view)
+    RecyclerView mScoresRecyclerView;
+    @BindView(R.id.scores_date_text_view)
+    TextView mScoresDateTextView;
 
     private Context mContext;
-    private FullDivisionTeamStandingsJSONData mFullDivisionTeamStandingsJSONData;
-    private DivisionStandingsAdapter mDivisionStandingsAdapter;
+    private ScoresData mScoreData;
+    private ScoresAdapter mScoresAdapter;
 
-    public static StandingsFragment newInstance() {
-        StandingsFragment standingsFragment = new StandingsFragment();
+    public static ScoresFragment newInstance() {
+        ScoresFragment scoresFragment = new ScoresFragment();
         //Bundle args = new Bundle();
         //args.putString("teamAbbreviation", teamAbbreviation);
         //allTeamFragment.setArguments(args);
-        return standingsFragment;
+        return scoresFragment;
     }
 
     @Override
@@ -66,13 +68,13 @@ public class StandingsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.standings_fragment,container,false);
+        View view = inflater.inflate(R.layout.scores_fragment,container,false);
 
         ButterKnife.bind(this,view);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
-        mStandingsRecyclerView.setLayoutManager(linearLayoutManager);
-        mStandingsRecyclerView.setHasFixedSize(true);
+        mScoresRecyclerView.setLayoutManager(linearLayoutManager);
+        mScoresRecyclerView.setHasFixedSize(true);
 
         setUpData();
         setUpAdapter();
@@ -82,12 +84,12 @@ public class StandingsFragment extends Fragment {
     }
 
     private void setUpData() {
-        mFullDivisionTeamStandingsJSONData = new FullDivisionTeamStandingsJSONData();
+        mScoreData = new ScoresData();
     }
 
     private void setUpAdapter() {
-        mDivisionStandingsAdapter = new DivisionStandingsAdapter(mContext,mFullDivisionTeamStandingsJSONData);
-        mStandingsRecyclerView.setAdapter(mDivisionStandingsAdapter);
+        mScoresAdapter = new ScoresAdapter(mContext,mScoreData);
+        mScoresRecyclerView.setAdapter(mScoresAdapter);
     }
 
     private void gatherData() {
@@ -95,13 +97,21 @@ public class StandingsFragment extends Fragment {
         byte[] encodingByte = Base64.encode (loginInfo.getBytes(), Base64.DEFAULT);
         final String encoding = new String(encodingByte);
 
-        int year = Calendar.getInstance().get(Calendar.YEAR);
+        String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+        String month = String.valueOf(Calendar.getInstance().get(Calendar.MONTH));
+        String day = String.valueOf(Calendar.getInstance().get(Calendar.DATE));
+        if(month.length() == 1)
+            month = "0" + month;
+        if(day.length() == 1) {
+            day = "0" + day;
+        }
+        String date = String.valueOf(year) + String.valueOf(month) + String.valueOf(day);
 
         AndroidNetworking.get(getString(R.string.mysportsfeeds_url))
                 .addPathParameter(getString(R.string.version_number), getString(R.string.mysportsfeeds_version))
-                .addPathParameter(getString(R.string.season_name), String.valueOf(year) + "-" + getString(R.string.regular))
-                .addPathParameter(getString(R.string.feeds),getString(R.string.feeds_division_team_standings))
-                //.setOkHttpClient(okHttpClient)
+                .addPathParameter(getString(R.string.season_name), year + "-" + getString(R.string.regular))
+                .addPathParameter(getString(R.string.feeds),getString(R.string.feeds_scoreboard))
+                .addQueryParameter(getString(R.string.for_date), date)
                 .addHeaders("Authorization", Credentials.basic(getString(R.string.username),getString(R.string.password)))
                 .setPriority(Priority.LOW)
                 .build()
@@ -110,8 +120,8 @@ public class StandingsFragment extends Fragment {
                     public void onResponse(String response) {
                         Gson gson = new Gson();
                         try {
-                            mFullDivisionTeamStandingsJSONData = gson.fromJson(response, FullDivisionTeamStandingsJSONData.class);
-                            mDivisionStandingsAdapter.refreshWithNewData(mFullDivisionTeamStandingsJSONData);
+                            mScoreData = gson.fromJson(response, ScoresData.class);
+                            mScoresAdapter.refreshWithNewData(mScoreData);
                         }catch(JsonSyntaxException e) {
                             Log.i("JSONSYNTAXException",e.getMessage());
                         }catch(JsonParseException e) {
@@ -122,11 +132,9 @@ public class StandingsFragment extends Fragment {
 
                     @Override
                     public void onError(ANError anError) {
-                        Log.i("tag-error",anError.toString());
+                        Log.i("tag-error",anError.getMessage());
                     }
                 });
 
     }
-
-
 }
