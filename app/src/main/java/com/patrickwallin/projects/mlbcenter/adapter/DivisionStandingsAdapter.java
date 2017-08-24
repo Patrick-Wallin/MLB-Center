@@ -32,6 +32,7 @@ public class DivisionStandingsAdapter extends RecyclerView.Adapter<ViewHolder> {
     private static final int ITEM_VIEW_TYPE_DIVISION_TITLE = 1;
     private static final int ITEM_VIEW_TYPE_TEAM_RECORD_TITLE = 2;
     private static final int ITEM_VIEW_TYPE_TEAM_RECORD = 3;
+    private static final int ITEM_VIEW_TYPE_BLANK_ROW = 4;
 
     private DivisionTeamStandingsJSONData mDivisionTeamStandingsJSONData;
     private List<String> mOrganizatedMLBStandings;
@@ -56,13 +57,15 @@ public class DivisionStandingsAdapter extends RecyclerView.Adapter<ViewHolder> {
                     DivisionJSONData division = divisions.get(i);
                     String[] name = division.getName().split("/");
                     if (!mOrganizatedMLBStandings.contains("LEAGUE NAME:"+name[0].trim())) {
+                        mOrganizatedMLBStandings.add("");
+                        mItemViewType.add(ITEM_VIEW_TYPE_BLANK_ROW);
                         mOrganizatedMLBStandings.add("LEAGUE NAME:"+name[0].trim());
                         mItemViewType.add(ITEM_VIEW_TYPE_LEAGUE_TITLE);
                     }
                     if (!mOrganizatedMLBStandings.contains(name[0].trim() + ":" + name[1].trim())) {
+                        //mOrganizatedMLBStandings.add(name[0].trim() + ":" + name[1].trim());
+                        //mItemViewType.add(ITEM_VIEW_TYPE_DIVISION_TITLE);
                         mOrganizatedMLBStandings.add(name[0].trim() + ":" + name[1].trim());
-                        mItemViewType.add(ITEM_VIEW_TYPE_DIVISION_TITLE);
-                        mOrganizatedMLBStandings.add("");
                         mItemViewType.add(ITEM_VIEW_TYPE_TEAM_RECORD_TITLE);
                     }
                     List<TeamEntryJSONData> teamEntryJSONDataList = division.getTeamEntry();
@@ -104,6 +107,10 @@ public class DivisionStandingsAdapter extends RecyclerView.Adapter<ViewHolder> {
                 v = LayoutInflater.from(parent.getContext()).inflate(R.layout.standings_team_record_item_fragment,parent,false);
                 vh = new StandingsTeamRecordViewHolder(v);
                 break;
+            case ITEM_VIEW_TYPE_BLANK_ROW:
+                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.standings_division_title_item_fragment,parent,false);
+                vh = new StandingsDivisionTitleViewHolder(v);
+                break;
             default:
                 vh = null;
                 break;
@@ -119,10 +126,10 @@ public class DivisionStandingsAdapter extends RecyclerView.Adapter<ViewHolder> {
             ((StandingsLeagueTitleViewHolder) holder).mStandingsLeagueTitleTextView.setText(mOrganizatedMLBStandings.get(position).split(":")[1]);
         }else {
             if(holder instanceof StandingsDivisionTitleViewHolder) {
-                ((StandingsDivisionTitleViewHolder) holder).mStandingsDivisionTitleTextView.setText(mOrganizatedMLBStandings.get(position).split(":")[1]);
+                //((StandingsDivisionTitleViewHolder) holder).mStandingsDivisionTitleTextView.setText(mOrganizatedMLBStandings.get(position).split(":")[1]);
             }else {
                 if(holder instanceof StandingsTitleForTeamRecordViewHolder) {
-
+                    ((StandingsTitleForTeamRecordViewHolder) holder).mStandingsTitleTeamNameTextView.setText(mOrganizatedMLBStandings.get(position).split(":")[1]);
                 }else {
                     if(holder instanceof StandingsTeamRecordViewHolder) {
                         String[] divisionAndTeam = mOrganizatedMLBStandings.get(position).split("-");

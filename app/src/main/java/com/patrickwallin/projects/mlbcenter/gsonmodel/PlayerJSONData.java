@@ -23,6 +23,27 @@ public class PlayerJSONData {
     @SerializedName("Position")
     @Expose
     private String position;
+    @SerializedName("Height")
+    @Expose
+    private String height;
+    @SerializedName("Weight")
+    @Expose
+    private String weight;
+    @SerializedName("BirthDate")
+    @Expose
+    private String birthDate;
+    @SerializedName("Age")
+    @Expose
+    private String age;
+    @SerializedName("BirthCity")
+    @Expose
+    private String birthCity;
+    @SerializedName("BirthCountry")
+    @Expose
+    private String birthCountry;
+    @SerializedName("IsRookie")
+    @Expose
+    private String isRookie;
 
     public String getID() {
         return iD;
@@ -62,5 +83,59 @@ public class PlayerJSONData {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public String getHeight() { return height; }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getBirthCity() {
+        return birthCity;
+    }
+
+    public void setBirthCity(String birthCity) {
+        this.birthCity = birthCity;
+    }
+
+    public String getBirthCountry() {
+        return birthCountry;
+    }
+
+    public void setBirthCountry(String birthCountry) {
+        this.birthCountry = birthCountry;
+    }
+
+    public String getIsRookie() {
+        return isRookie;
+    }
+
+    public void setIsRookie(String isRookie) {
+        this.isRookie = isRookie;
     }
 }

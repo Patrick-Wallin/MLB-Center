@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
 import com.patrickwallin.projects.mlbcenter.fragment.AllTeamFragment;
+import com.patrickwallin.projects.mlbcenter.fragment.PlayersFragment;
 import com.patrickwallin.projects.mlbcenter.fragment.PlayersStatisticsFragment;
 import com.patrickwallin.projects.mlbcenter.fragment.ScoresFragment;
 import com.patrickwallin.projects.mlbcenter.fragment.StandingsFragment;
@@ -47,8 +48,15 @@ public class MainTabFragmentPagerAdapter extends FragmentStatePagerAdapter {
         else {
             if(mFragmentMenuKey.get(position).equalsIgnoreCase("statistics"))
                 return PlayersStatisticsFragment.newInstance();
-            else
-                return StandingsFragment.newInstance();
+            else {
+                if(mFragmentMenuKey.get(position).equalsIgnoreCase("players")) {
+                    return PlayersFragment.newInstance();
+                }else {
+                    return StandingsFragment.newInstance();
+                }
+
+            }
+
         }
 
         //Log.i(LOG_TAG,"position: " + String.valueOf(position));

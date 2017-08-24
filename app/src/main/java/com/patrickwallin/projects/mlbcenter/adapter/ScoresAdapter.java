@@ -43,6 +43,8 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresViewHolder> {
             final GameScoreJSONData gameScoreJSONData = mScoresData.getScoreboard().getGameScore().get(position);
             holder.mAwayTeamNameTextView.setText(gameScoreJSONData.getGame().getAwayTeam().getName());
             holder.mHomeTeamNameTextView.setText(gameScoreJSONData.getGame().getHomeTeam().getName());
+            holder.mAwayTeamRunsTextView.setText(gameScoreJSONData.getAwayScore());
+            holder.mHomeTeamRunsTextView.setText(gameScoreJSONData.getHomeScore());
         }
     }
 

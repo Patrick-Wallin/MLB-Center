@@ -2,13 +2,16 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
+    android:padding="5dp"
     android:weightSum="8.0"
+    android:background="@android:color/holo_blue_light"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     
     <TextView
         android:id="@+id/standings_title_team_name_text_view"
         android:text="@string/standings_division_title_team_name"
+        android:textStyle="bold"
         android:layout_weight="2.0"
         android:layout_width="0dip"
         android:layout_height="wrap_content" />

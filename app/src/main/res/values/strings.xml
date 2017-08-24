@@ -104,6 +104,7 @@
     <string name="feeds_cumulative_player_stats">cumulative_player_stats.json</string>
     <string name="feeds_cumulative_player_stats_homeruns">cumulative_player_stats.json?sort=stats.HR.D&amp;playerstats=HR&amp;limit=2</string>
     <string name="feeds_cumulative_player_stats_batting_average">cumulative_player_stats.json?sort=stats.AVG.D&amp;playerstats=AVG,PA&amp;limit=100</string>
+    <string name="feeds_roster_players">roster_players.json</string>
     <string name="for_date">fordate</string>
     <string name="current_year">2017</string>
     <string name="regular">regular</string>
