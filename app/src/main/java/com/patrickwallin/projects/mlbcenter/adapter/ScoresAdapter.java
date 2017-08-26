@@ -11,6 +11,7 @@ import com.patrickwallin.projects.mlbcenter.gsonmodel.GameJSONData;
 import com.patrickwallin.projects.mlbcenter.gsonmodel.GameScoreJSONData;
 import com.patrickwallin.projects.mlbcenter.gsonmodel.ScoresData;
 import com.patrickwallin.projects.mlbcenter.viewholder.ScoresViewHolder;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by piwal on 8/21/2017.
@@ -45,6 +46,23 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresViewHolder> {
             holder.mHomeTeamNameTextView.setText(gameScoreJSONData.getGame().getHomeTeam().getName());
             holder.mAwayTeamRunsTextView.setText(gameScoreJSONData.getAwayScore());
             holder.mHomeTeamRunsTextView.setText(gameScoreJSONData.getHomeScore());
+            String awayTeamAbbreviation = gameScoreJSONData.getGame().getAwayTeam().getAbbreviation().trim().toLowerCase();
+            String homeTeamAbbreviation = gameScoreJSONData.getGame().getHomeTeam().getAbbreviation().trim().toLowerCase();
+            int awayTeamResourceImage = mContext.getResources().getIdentifier(awayTeamAbbreviation, "drawable", mContext.getPackageName());
+            if (awayTeamResourceImage > 0) {
+                Picasso.with(mContext)
+                        .load(awayTeamResourceImage)
+                        .into(holder.mAwayTeamImageView);
+            }
+            int homeTeamResourceImage = mContext.getResources().getIdentifier(homeTeamAbbreviation, "drawable", mContext.getPackageName());
+            if (homeTeamResourceImage > 0) {
+                Picasso.with(mContext)
+                        .load(homeTeamResourceImage)
+                        .into(holder.mHomeTeamImageView);
+            }
+            if(gameScoreJSONData.getGame().getTime() != null) {
+                holder.mScoresTimeTextView.setText(gameScoreJSONData.getGame().getTime().trim());
+            }
         }
     }
 

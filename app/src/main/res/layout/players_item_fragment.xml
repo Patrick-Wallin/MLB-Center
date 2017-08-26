@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
 <android.support.v7.widget.CardView
     android:id="@+id/players_card_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -7,7 +8,15 @@
     card_view:cardCornerRadius="4dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    -->
 
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/player_team_image_view"
         android:layout_width="wrap_content"
@@ -24,34 +33,17 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/height_weight_text_view"
+            android:id="@+id/position_height_weight_age_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/birthdate_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/age_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/birth_city_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/birth_country_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/rookie_text_view"
+            android:id="@+id/born_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
+    </LinearLayout>
+    <!--
 </android.support.v7.widget.CardView>
+    -->

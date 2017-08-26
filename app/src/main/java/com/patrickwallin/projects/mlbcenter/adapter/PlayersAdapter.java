@@ -44,14 +44,59 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersViewHolder> {
                 mRosterPlayersData.getRosterplayers() != null &&
                 mRosterPlayersData.getRosterplayers().getPlayerentry() != null) {
             PlayerEntryJSONData playerEntryJSONData = mRosterPlayersData.getRosterplayers().getPlayerentry().get(position);
-            PlayerJSONData playerJSONData = playerEntryJSONData.getPlayer();
-            holder.mPlayerNameTextView.setText(playerJSONData.getLastName().trim() + ", " + playerJSONData.getFirstName());
-            holder.mHeightWeightTextView.setText(playerJSONData.getHeight() + " " + playerJSONData.getWeight().trim() + " lbs");
-            holder.mBirthDateTextView.setText(playerJSONData.getBirthDate());
-            holder.mAgeTextView.setText(playerJSONData.getAge());
-            holder.mBirthCountryTextView.setText(playerJSONData.getBirthCountry());
-            holder.mBirthCityTextView.setText(playerJSONData.getBirthCity());
-            holder.mRookieTextView.setText(playerJSONData.getIsRookie().trim());
+            if(playerEntryJSONData != null) {
+                PlayerJSONData playerJSONData = playerEntryJSONData.getPlayer();
+                String nameAndJerseyNumber = "";
+                String positionAndHeightAndWeightAndAge = "";
+                String born = "";
+                if (playerJSONData != null) {
+                    if(playerJSONData.getLastName() != null)
+                        nameAndJerseyNumber = playerJSONData.getLastName().trim();
+                    if(playerJSONData.getFirstName() != null)
+                        nameAndJerseyNumber += ", " + playerJSONData.getFirstName();
+                    if(playerJSONData.getJerseyNumber() != null)
+                        nameAndJerseyNumber += " | #" + playerJSONData.getJerseyNumber();
+                    if(playerJSONData.getPosition() != null)
+                        positionAndHeightAndWeightAndAge = playerJSONData.getPosition().trim();
+                    if(playerJSONData.getHeight() != null) {
+                        if(!positionAndHeightAndWeightAndAge.isEmpty())
+                            positionAndHeightAndWeightAndAge += " | ";
+                        positionAndHeightAndWeightAndAge += playerJSONData.getHeight();
+                    }
+                    if(playerJSONData.getWeight() != null) {
+                        if(!positionAndHeightAndWeightAndAge.isEmpty())
+                            positionAndHeightAndWeightAndAge += " / ";
+                        positionAndHeightAndWeightAndAge += playerJSONData.getWeight();
+                    }
+                    if(playerJSONData.getAge() != null) {
+                        if(!positionAndHeightAndWeightAndAge.isEmpty())
+                            positionAndHeightAndWeightAndAge += " | Age: ";
+                        positionAndHeightAndWeightAndAge += playerJSONData.getAge();
+                    }
+                    if(playerJSONData.getBirthDate() != null ||
+                            playerJSONData.getBirthCity() != null ||
+                            playerJSONData.getBirthCountry() != null) {
+                        born = "";
+                        if(playerJSONData.getBirthDate() != null)
+                            born += playerJSONData.getBirthDate().trim();
+                        if(playerJSONData.getBirthCity() != null) {
+                            if(!born.isEmpty())
+                                born += " | ";
+                            born += playerJSONData.getBirthCity();
+                        }
+                        if(playerJSONData.getBirthCountry() != null) {
+                            if(!born.isEmpty())
+                                born += ", ";
+                            born += playerJSONData.getBirthCountry();
+                        }
+                        born = "Born: " + born;
+                    }
+
+                }
+                holder.mPlayerNameTextView.setText(nameAndJerseyNumber);
+                holder.mPositionHeightWeightAgeTextView.setText(positionAndHeightAndWeightAndAge);
+                holder.mBornTextView.setText(born);
+            }
         }
     }
 

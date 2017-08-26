@@ -21,18 +21,10 @@ public class PlayersViewHolder extends RecyclerView.ViewHolder {
     public ImageView mPlayerTeamImageView;
     @BindView(R.id.player_name_text_view)
     public TextView mPlayerNameTextView;
-    @BindView(R.id.height_weight_text_view)
-    public TextView mHeightWeightTextView;
-    @BindView(R.id.birthdate_text_view)
-    public TextView mBirthDateTextView;
-    @BindView(R.id.age_text_view)
-    public TextView mAgeTextView;
-    @BindView(R.id.birth_city_text_view)
-    public TextView mBirthCityTextView;
-    @BindView(R.id.birth_country_text_view)
-    public TextView mBirthCountryTextView;
-    @BindView(R.id.rookie_text_view)
-    public TextView mRookieTextView;
+    @BindView(R.id.position_height_weight_age_text_view)
+    public TextView mPositionHeightWeightAgeTextView;
+    @BindView(R.id.born_text_view)
+    public TextView mBornTextView;
 
     public PlayersViewHolder(View itemView) {
         super(itemView);

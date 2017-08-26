@@ -1,9 +1,11 @@
 package com.patrickwallin.projects.mlbcenter.fragment;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
@@ -24,6 +26,7 @@ import com.patrickwallin.projects.mlbcenter.R;
 import com.patrickwallin.projects.mlbcenter.adapter.PlayersAdapter;
 import com.patrickwallin.projects.mlbcenter.gsonmodel.RosterPlayersData;
 import com.patrickwallin.projects.mlbcenter.gsonmodel.ScoresData;
+import com.patrickwallin.projects.mlbcenter.utilities.DividerItemDecoration;
 
 import java.util.Calendar;
 
@@ -72,6 +75,11 @@ public class PlayersFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         mPlayersRecyclerView.setLayoutManager(linearLayoutManager);
         mPlayersRecyclerView.setHasFixedSize(true);
+
+        Drawable dividerDrawable = ContextCompat.getDrawable(mContext, R.drawable.divider_line);
+
+        RecyclerView.ItemDecoration dividerItemDecoration = new DividerItemDecoration(dividerDrawable);
+        mPlayersRecyclerView.addItemDecoration(dividerItemDecoration);
 
         setUpData();
         setUpAdapter();
